@@ -8,7 +8,7 @@ import {
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
-import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   const location = useLocation();
@@ -19,12 +19,10 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
       <nav className={`${styles.menu} p-4`}>
         <div className={styles.menu_part_left}>
           <>
-            <Link
-              className={clsx(
-                currnetLocation === '/'
-                  ? [styles.link_active, styles.link]
-                  : styles.link
-              )}
+            <NavLink
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.link_active : styles.link}`
+              }
               to={'/'}
             >
               <BurgerIcon
@@ -33,43 +31,39 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               <p className='text text_type_main-default ml-2 mr-10'>
                 Конструктор
               </p>
-            </Link>
+            </NavLink>
           </>
           <>
-            <Link
-              className={clsx(
-                currnetLocation === '/feed'
-                  ? [styles.link_active, styles.link]
-                  : styles.link
-              )}
+            <NavLink
+              className={({ isActive }) =>
+                `${styles.link} ${isActive ? styles.link_active : styles.link}`
+              }
               to={'/feed'}
             >
               <ListIcon
                 type={currnetLocation === '/feed' ? 'primary' : 'secondary'}
               />
               <p className='text text_type_main-default ml-2'>Лента заказов</p>
-            </Link>
+            </NavLink>
           </>
         </div>
         <div className={styles.logo}>
-          <Link to={'/'}>
+          <NavLink to={'/'}>
             <Logo className='' />
-          </Link>
+          </NavLink>
         </div>
         <div className={styles.link_position_last}>
-          <Link
-            className={clsx(
-              currnetLocation === '/profile'
-                ? [styles.link_active, styles.link]
-                : styles.link
-            )}
+          <NavLink
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.link_active : styles.link}`
+            }
             to={'/profile'}
           >
             <ProfileIcon type={'primary'} />
             <p className='text text_type_main-default ml-2'>
               {userName || 'Личный кабинет'}
             </p>
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </header>

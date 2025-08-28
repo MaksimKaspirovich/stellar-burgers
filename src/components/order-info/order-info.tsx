@@ -19,7 +19,7 @@ export const OrderInfo: FC = () => {
 
   useEffect(() => {
     dispatch(getOrderByNumberThunk(Number(number)));
-  });
+  }, [dispatch]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {

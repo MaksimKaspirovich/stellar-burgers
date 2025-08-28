@@ -26,6 +26,8 @@ const App = () => {
   const navigate = useNavigate();
   const background = location.state?.background;
 
+  const handleCloseModal = () => navigate(-1);
+
   useEffect(() => {
     dispatch(getIngredientsThunk()).unwrap().catch(console.error);
     dispatch(getUserThunk()).unwrap().catch(console.error);
@@ -107,7 +109,7 @@ const App = () => {
               <Modal
                 key={location.pathname}
                 title={'Информация о заказе'}
-                onClose={() => navigate(-1)}
+                onClose={handleCloseModal}
               >
                 <OrderInfo />
               </Modal>
@@ -119,7 +121,7 @@ const App = () => {
               <Modal
                 key={location.pathname}
                 title={'Детали ингредиента'}
-                onClose={() => navigate(-1)}
+                onClose={handleCloseModal}
               >
                 <IngredientDetails />
               </Modal>
@@ -131,7 +133,7 @@ const App = () => {
               <Modal
                 key={location.pathname}
                 title={'Информация о заказе'}
-                onClose={() => navigate(-1)}
+                onClose={handleCloseModal}
               >
                 <OrderInfo />
               </Modal>

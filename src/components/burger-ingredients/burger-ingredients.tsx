@@ -6,15 +6,22 @@ import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
 import { ingredientsSelector } from '../../services/slices/ingredients/slice';
 import { useSelector } from '../../services/store';
+import { createSelector } from '@reduxjs/toolkit';
 
 export const BurgerIngredients: FC = () => {
   /** TODO: взять переменные из стора */
-  const ingredients = useSelector(ingredientsSelector);
-  const buns = ingredients.filter((ingredient) => ingredient.type === 'bun');
-  const mains = ingredients.filter((ingredient) => ingredient.type === 'main');
-  const sauces = ingredients.filter(
-    (ingredient) => ingredient.type === 'sauce'
+  const selectBuns = createSelector([ingredientsSelector], (ingredients) =>
+    ingredients.filter((ingredient) => ingredient.type === 'bun')
   );
+  const selectMains = createSelector([ingredientsSelector], (ingredients) =>
+    ingredients.filter((ingredient) => ingredient.type === 'main')
+  );
+  const selectSauces = createSelector([ingredientsSelector], (ingredients) =>
+    ingredients.filter((ingredient) => ingredient.type === 'sauce')
+  );
+  const buns = useSelector(selectBuns);
+  const mains = useSelector(selectMains);
+  const sauces = useSelector(selectSauces);
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

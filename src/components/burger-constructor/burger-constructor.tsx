@@ -34,9 +34,9 @@ export const BurgerConstructor: FC = () => {
 
     //Формируем массив ID ингредиентов для заказа
     const orderData: string[] = [
-      bun?._id!,
+      bun._id,
       ...ingredients.map((ingredient) => ingredient._id),
-      bun?._id!
+      bun._id
     ];
 
     if (!isAuth) {
@@ -52,7 +52,6 @@ export const BurgerConstructor: FC = () => {
   const closeOrderModal = () => {
     navigate('/', { replace: true });
     dispatch(clearOrder());
-    dispatch(clearBurgerConstructor());
   };
 
   const price = useMemo(

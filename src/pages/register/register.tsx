@@ -25,7 +25,7 @@ export const Register: FC = () => {
 
   useEffect(() => {
     dispatch(clearErrors());
-  }, []);
+  }, [dispatch]);
 
   return (
     <RegisterUI
