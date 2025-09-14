@@ -11,6 +11,7 @@ import {
 } from './actions';
 
 export interface UserState {
+  isAuthenticated: boolean;
   loginUserRequest: boolean;
   user: TUser | null;
   orders: TOrder[];
@@ -18,7 +19,8 @@ export interface UserState {
   error: string | null;
 }
 
-const initialState: UserState = {
+export const initialState: UserState = {
+  isAuthenticated: false,
   loginUserRequest: false,
   user: null,
   orders: [],

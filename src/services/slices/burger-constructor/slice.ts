@@ -11,7 +11,7 @@ export interface burgerConstructorState {
 }
 
 //Начальное положение бургера
-const initialState: burgerConstructorState = {
+export const initialState: burgerConstructorState = {
   burgerConstructor: {
     bun: null,
     ingredients: []
@@ -20,7 +20,7 @@ const initialState: burgerConstructorState = {
 };
 
 // Создаем слайс
-const burgerConstructorSlice = createSlice({
+export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
   selectors: {
