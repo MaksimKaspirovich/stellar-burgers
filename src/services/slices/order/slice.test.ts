@@ -1,10 +1,6 @@
-import exp from 'constants';
 import { orderBurgerThunk } from './actions';
 import reducer, {
-  initialState,
-  clearOrder,
-  clearPendingOrderData,
-  setPendingOrderData
+  initialState
 } from './slice';
 import { expect } from '@jest/globals';
 

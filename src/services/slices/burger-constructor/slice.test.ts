@@ -8,7 +8,6 @@ import reducer, {
   downIngredients
 } from './slice';
 import { expect } from '@jest/globals';
-import { on } from 'events';
 
 // Частичный мок - мокаем только nanoid
 jest.mock('@reduxjs/toolkit', () => {
@@ -19,6 +18,9 @@ jest.mock('@reduxjs/toolkit', () => {
     nanoid: jest.fn()
   };
 });
+
+// Тип для ингредиента с id (который добавляется в конструкторе)
+type TIngredientWithId = TIngredient & { id: string };
 
 describe('burgerConstructorSlice', () => {
   const mockIngredient: TIngredient = {
@@ -68,17 +70,22 @@ describe('burgerConstructorSlice', () => {
   it('Удаление ингредиента', () => {
     const startState = reducer(undefined, addIngredient(mockIngredient));
     const onDelete = startState.burgerConstructor.ingredients[0];
-    const state = reducer(undefined, removeIngredient(onDelete));
+    const state = reducer(startState, removeIngredient(onDelete));
 
     expect(state.burgerConstructor.ingredients.length).toBe(0);
   });
 
-  it('Не должен удаляться ингрединет, если отсутствует id', () => {
+  it('Не должен удаляться ингредиент, если отсутствует id', () => {
     let state = reducer(undefined, addIngredient(mockIngredient));
     const initialIngredientCount = state.burgerConstructor.ingredients.length;
 
-    const ingredientWithoutId = { ...mockIngredient, id: undefined };
-    state = reducer(state, removeIngredient(ingredientWithoutId as any));
+    // Создаем объект без id, используя тип утверждения для теста
+    const ingredientWithoutId = {
+      ...mockIngredient,
+      id: undefined
+    } as unknown as TIngredientWithId;
+    
+    state = reducer(state, removeIngredient(ingredientWithoutId));
 
     expect(state.burgerConstructor.ingredients.length).toBe(
       initialIngredientCount

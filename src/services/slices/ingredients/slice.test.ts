@@ -2,8 +2,6 @@ import reducer, { initialState } from './slice';
 import { getIngredientsThunk } from './actions';
 import { TIngredient } from '@utils-types';
 import { expect } from '@jest/globals';
-import exp from 'constants';
-import { error } from 'console';
 
 describe('ingredientsSlice', () => {
   const mockIngredients: TIngredient[] = [
